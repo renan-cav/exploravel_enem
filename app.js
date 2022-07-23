@@ -410,7 +410,7 @@ function mostraProfic(){
     /* Muda o texto do HTML para inserir valores dentro das barras do histograma */
     graphProfic[indice].textContent = numero
     
-    indice++ 
+    indice++
   }
 }
 
