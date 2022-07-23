@@ -1,3 +1,4 @@
+/* Cria array com as frases a serem mostradas de forma aleatória no site */
 let fatos = ['<li>A nota media na redação do ENEM em todo o Brasil foi <b>590,40</b>.</li>',
 '<li>Entre os participantes que fizeram a redação em todo o país, apenas <b>28</b> tiraram a nota máxima.</li>',
 '<li>O <b>Rio de Janeiro</b> é o estado com o maior número de redações com nota máxima: <b>7</b>.</li>',
@@ -6,6 +7,8 @@ let fatos = ['<li>A nota media na redação do ENEM em todo o Brasil foi <b>590,
 '<li><b>Acre</b> foi o estado com a menor média nas notas da redação: <b>544,75</b>.</li>',
 '<li><b>5.783.133</b>alunos se inscreveram para o ENEM 2020. Desses, <b>2.754.164</b> fizeram a redação.</li>',
 ]
+
+/* Cria propriedade com as médias das notas do país e de cada estado */
 let mediaUf = { "br" : 590.40,
 "ro" : 548.63,
 "ac" : 544.75,
@@ -35,6 +38,8 @@ let mediaUf = { "br" : 590.40,
 "go" : 593.79,
 "df" : 593.81
 }
+
+/* Cria propriedade com a distribuição das notas do país e de cada estado */
 let profic = { "br" : [199, 1939, 66988, 353464, 331851, 670072, 537652, 279558, 249840, 183373],
 "ro" : [4, 24, 872, 3954, 3747, 6598, 4427, 1883, 1522, 885],
 "ac" : [2, 18, 689, 3249, 3022, 5581, 3574, 1418, 762],
@@ -64,6 +69,8 @@ let profic = { "br" : [199, 1939, 66988, 353464, 331851, 670072, 537652, 279558,
 "go" : [5, 90, 2711, 12195, 12392, 22737, 17344, 9496, 9356, 7733],
 "df" : [1, 40, 1228, 6738, 6134, 13940, 11708, 5751, 4937, 3558]
 }
+
+/* Cria objeto com a distribuição das notas da redação do ENEM do país e por estado desgregadas por sexo */
 let sexo = {"br" : {"fem":[87, 838, 29373, 191679, 197239, 407122, 328958, 177821, 164863, 125603, 20],
 "masc":[112, 1101, 37615, 161785, 134612, 262950, 208694, 101737, 84977, 57742, 8]
 },
@@ -149,6 +156,8 @@ let sexo = {"br" : {"fem":[87, 838, 29373, 191679, 197239, 407122, 328958, 17782
  "masc":[1, 19, 654, 2954, 2514, 5673, 4649, 2110, 1607, 1035, 0]
 }
 }
+
+/* Cria objeto com a distribuição das notas da redação do ENEM do país e por estado desgregadas por raça */
 let raca = {"br" : {"nd":[4, 52, 1411, 6644, 6350, 12294, 10187, 5468, 4957, 3988, 1],
 "branca":[28, 377, 16495, 108037, 98301, 223254, 213854, 129942, 127669, 101174, 13],
 "preta":[34, 329, 11523, 50143, 48479, 91304, 63687, 27209, 20169, 11.809, 2],
@@ -347,6 +356,8 @@ let raca = {"br" : {"nd":[4, 52, 1411, 6644, 6350, 12294, 10187, 5468, 4957, 398
 }
 }
 
+
+/* Cria a função par aleatorizar as frases mostradas no HTML */
 function aleat(fatos){
   let max = fatos.length
   let min = 0
@@ -355,28 +366,35 @@ function aleat(fatos){
   return indice
 }
 
+/* Seleciona a ul na qual seram mostradas as frases */
 let listaFatos = document.querySelector('.carrossel')
 
+/* Cria loop para que as frases mostradas não apareçam repetidas */
 for ( let i = 0; i < 3; i++ ) {
   let indice = aleat(fatos)
   listaFatos.innerHTML = listaFatos.innerHTML + fatos [indice]
   fatos.splice(indice, 1)
 }
 
+/* Cria as variáveis para selecionar os elementos de entrada e saída das informações de média de notas */
 let seletorMedia = document.getElementById('media')
 let mostrarMedia = document.querySelector('output.mostraMedia')
 
+/* Cria função que mostra a informação escolhida no HTML */
 function mostra(){
   let localMedia = seletorMedia.value
   let media = mediaUf [localMedia]
   mostrarMedia.textContent = media
 }
 
+/* Cria o evento que escuta a troca de estado no select */
 seletorMedia.addEventListener('change', mostra)
 
+/* Cria as variáveis para selecionar os elementos de entrada e saída das informações da distribuição das notas */
 let seletorProfic = document.getElementById('proficiencia')
 let mostrarProfic = document.querySelector('.barras > div')
 
+/* Cria função para pegar os valores da propriedade javascript e mostrá-los em um histograma na página HTML */
 function mostraProfic(){
   let localProfic = seletorProfic.value
   let numeros = profic [localProfic]
